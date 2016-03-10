@@ -54,29 +54,6 @@ func create_cascades() -> Cascades {
     return cascades_from_deck(deck)
 }
 
-func print_cascades(cascades: Cascades) {
-    var j = 0
-    let max_cascade = cascades.reduce(0) { (a, cascade) -> Int in
-        if cascade.count > a {
-            return cascade.count
-        } else {
-            return a
-        }
-    }
-    while j < max_cascade {
-        for i in 0 ... NUM_CASCADES - 1 {
-            var cascade = cascades[i]
-            if j < cascade.count {
-                print(cascade[j], terminator: "")
-            } else {
-                print("      ", terminator: "")
-            }
-        }
-        print("")
-        j++
-    }
-}
-
 // TODO: In place shuffle
 func shuffle_deck(var deck: Deck) {
     for i in 0 ... DECK_SIZE - 1 {
