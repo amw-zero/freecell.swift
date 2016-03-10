@@ -41,7 +41,7 @@ func make_single_card_move(input: String) -> Move? {
     return .SingleCardMove(source_cascade, dest_cascade)
 }
 
-func move_from_input(input: String, _ game_state: GameState) -> Move? {
+func move_from_input(input: String) -> Move? {
     switch input {
     case let single_card_input where single_card_input.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 3:
         return make_single_card_move(single_card_input)

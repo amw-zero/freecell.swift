@@ -46,7 +46,6 @@ func cascades_from_deck(deck: Deck) -> Cascades {
         cascades[c] = cascade
     }
     
-    
     return cascades
 }
 
@@ -69,6 +68,8 @@ func print_cascades(cascades: Cascades) {
             var cascade = cascades[i]
             if j < cascade.count {
                 print(cascade[j], terminator: "")
+            } else {
+                print("      ", terminator: "")
             }
         }
         print("")

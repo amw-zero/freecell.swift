@@ -30,12 +30,13 @@ func main() {
     
     var input = ""
     while input != "q\n" {
-        print_cascades(cascades)
+        print("")
+        print_cascades(game_state.cascades)
         if let raw_input = get_input() {
             input = raw_input
             
-            if let move = move_from_input(raw_input, game_state) {
-                print(move)
+            if let move = move_from_input(raw_input) {
+                game_state.perform_move(move)
             } else {
                 print("Unrecognized command")
             }
