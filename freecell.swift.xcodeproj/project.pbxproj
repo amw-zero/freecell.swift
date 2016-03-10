@@ -10,6 +10,8 @@
 		BE51F5071C91101900862DFD /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE51F5061C91101900862DFD /* Deck.swift */; };
 		BE8764DE1C90DCCC002FBDEE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8764DD1C90DCCC002FBDEE /* main.swift */; };
 		BE8764E51C90E2D2002FBDEE /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8764E41C90E2D2002FBDEE /* Card.swift */; };
+		BEEC5BDC1C91D3AD0037D839 /* Move.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC5BDB1C91D3AD0037D839 /* Move.swift */; };
+		BEEC5BDE1C91D91F0037D839 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEC5BDD1C91D91F0037D839 /* GameState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +31,8 @@
 		BE8764DA1C90DCCC002FBDEE /* freecell.swift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = freecell.swift; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE8764DD1C90DCCC002FBDEE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BE8764E41C90E2D2002FBDEE /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		BEEC5BDB1C91D3AD0037D839 /* Move.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Move.swift; sourceTree = "<group>"; };
+		BEEC5BDD1C91D91F0037D839 /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				BE8764DD1C90DCCC002FBDEE /* main.swift */,
 				BE8764E41C90E2D2002FBDEE /* Card.swift */,
 				BE51F5061C91101900862DFD /* Deck.swift */,
+				BEEC5BDB1C91D3AD0037D839 /* Move.swift */,
+				BEEC5BDD1C91D91F0037D839 /* GameState.swift */,
 			);
 			path = freecell.swift;
 			sourceTree = "<group>";
@@ -78,6 +84,7 @@
 				BE8764D61C90DCCC002FBDEE /* Sources */,
 				BE8764D71C90DCCC002FBDEE /* Frameworks */,
 				BE8764D81C90DCCC002FBDEE /* CopyFiles */,
+				BE51F5081C91CDE500862DFD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -120,12 +127,30 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		BE51F5081C91CDE500862DFD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BE8764D61C90DCCC002FBDEE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEEC5BDC1C91D3AD0037D839 /* Move.swift in Sources */,
 				BE51F5071C91101900862DFD /* Deck.swift in Sources */,
+				BEEC5BDE1C91D91F0037D839 /* GameState.swift in Sources */,
 				BE8764DE1C90DCCC002FBDEE /* main.swift in Sources */,
 				BE8764E51C90E2D2002FBDEE /* Card.swift in Sources */,
 			);
