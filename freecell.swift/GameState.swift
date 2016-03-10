@@ -24,9 +24,14 @@ class GameState {
         case .SingleCardMove(let source_cascade_idx, let dest_cascade_idx):
             var source_cascade = cascades[source_cascade_idx]
             var dest_cascade = cascades[dest_cascade_idx]
-
-            // if legal move
-            // var card = source_cascade.last
+            
+            if let source_card = source_cascade.last, dest_card = dest_cascade.last {
+                if !is_legal_cascade_move(source_card, dst: dest_card) {
+                    print("Illegal move!")
+                    return
+                }
+            }
+            
             guard let card = source_cascade.popLast() else {
                 print("GameState: No card in cascade")
                 return
@@ -71,9 +76,7 @@ func print_free_cells(cards: [Card]) {
         } else {
             print(" [ ]  ", terminator: "")
         }
-
     }
-    
 }
 
 func print_cascades(cascades: Cascades) {
@@ -97,5 +100,15 @@ func print_cascades(cascades: Cascades) {
         print("")
         j++
     }
+    print("")
+    for i in 0 ... NUM_CASCADES - 1 {
+        if let cascade_letter = cascade_letter_from_num(i) {
+            print("  \(cascade_letter)   ", terminator: "")
+        } else {
+            print("Attempted to print out of bounds cascade!")
+        }
+    }
+    print("")
+    print("")
 }
 

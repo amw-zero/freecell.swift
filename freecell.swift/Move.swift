@@ -13,20 +13,6 @@ enum Move {
     case FreeCellMove(Int)
 }
 
-func cascade_num_from_letter(string: String) -> Int? {
-    switch string {
-        case "a": return 0
-        case "b": return 1
-        case "c": return 2
-        case "d": return 3
-        case "e": return 4
-        case "f": return 5
-        case "g": return 6
-        case "h": return 7
-        default: return nil
-    }
-}
-
 func is_legal_free_cell_move(src: Card) -> Bool {
     return false
 }

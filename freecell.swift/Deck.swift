@@ -54,6 +54,34 @@ func create_cascades() -> Cascades {
     return cascades_from_deck(deck)
 }
 
+func cascade_num_from_letter(string: String) -> Int? {
+    switch string {
+    case "a": return 0
+    case "b": return 1
+    case "c": return 2
+    case "d": return 3
+    case "e": return 4
+    case "f": return 5
+    case "g": return 6
+    case "h": return 7
+    default: return nil
+    }
+}
+
+func cascade_letter_from_num(num: Int) -> String? {
+    switch num {
+    case 0: return "a"
+    case 1: return "b"
+    case 2: return "c"
+    case 3: return "d"
+    case 4: return "e"
+    case 5: return "f"
+    case 6: return "g"
+    case 7: return "h"
+    default: return nil
+    }
+}
+
 // TODO: In place shuffle
 func shuffle_deck(var deck: Deck) {
     for i in 0 ... DECK_SIZE - 1 {
