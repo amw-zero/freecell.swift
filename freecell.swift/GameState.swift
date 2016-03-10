@@ -60,10 +60,14 @@ class GameState {
     }
     
     func render() {
+        print("space                                            enter")
         print_cells(free_cells)
         print("   :)   ", terminator: "")
         print_cells(foundations)
         print("")
+        if (free_cells.count > 0) {
+            print_free_cell_labels(free_cells)
+        }
         print("")
         print("")
         
@@ -77,6 +81,14 @@ func print_cells(cards: [Card]) {
             print("[\(cards[i])] ", terminator: "")
         } else {
             print("[  ]  ", terminator: "")
+        }
+    }
+}
+
+func print_free_cell_labels(free_cells: [Card]) {
+    for i in 0 ... free_cells.count - 1 {
+        if let free_cell_letter = free_cell_letter_from_num(i) {
+            print("  \(free_cell_letter)   ", terminator: "")
         }
     }
 }

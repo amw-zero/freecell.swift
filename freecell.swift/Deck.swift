@@ -54,6 +54,16 @@ func create_cascades() -> Cascades {
     return cascades_from_deck(deck)
 }
 
+func free_cell_letter_from_num(num: Int) -> String? {
+    switch num {
+    case 0: return "w"
+    case 1: return "x"
+    case 2: return "y"
+    case 3: return "z"
+    default: return nil
+    }
+}
+
 func cascade_num_from_letter(string: String) -> Int? {
     switch string {
     case "a": return 0
