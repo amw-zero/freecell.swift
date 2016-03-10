@@ -58,7 +58,7 @@ struct Card: CustomStringConvertible, Comparable {
 
     // MARK: CustomStringConvertible
     var description: String {
-        return "[\(rank.rawValue)\(suit)] "
+        return String(format: "%2d%@   ", rank.rawValue, suit.description)
     }
 }
 
