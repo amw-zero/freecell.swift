@@ -60,8 +60,10 @@ class GameState {
     }
     
     func render() {
-        print_free_cells(free_cells)
-        
+        print_cells(free_cells)
+        print("   :)   ", terminator: "")
+        print_cells(foundations)
+        print("")
         print("")
         print("")
         
@@ -69,12 +71,12 @@ class GameState {
     }
 }
 
-func print_free_cells(cards: [Card]) {
+func print_cells(cards: [Card]) {
     for i in 0 ... 3 {
         if i < cards.count {
-            print(" [\(cards[i])] ", terminator: "")
+            print("[\(cards[i])] ", terminator: "")
         } else {
-            print(" [ ]  ", terminator: "")
+            print("[  ]  ", terminator: "")
         }
     }
 }
@@ -92,9 +94,9 @@ func print_cascades(cascades: Cascades) {
         for i in 0 ... NUM_CASCADES - 1 {
             var cascade = cascades[i]
             if j < cascade.count {
-                print(cascade[j], terminator: "")
+                print("  \(cascade[j])  ", terminator: "")
             } else {
-                print("      ", terminator: "")
+                print("       ", terminator: "")
             }
         }
         print("")
@@ -103,7 +105,7 @@ func print_cascades(cascades: Cascades) {
     print("")
     for i in 0 ... NUM_CASCADES - 1 {
         if let cascade_letter = cascade_letter_from_num(i) {
-            print("  \(cascade_letter)   ", terminator: "")
+            print("   \(cascade_letter)   ", terminator: "")
         } else {
             print("Attempted to print out of bounds cascade!")
         }
