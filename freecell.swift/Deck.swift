@@ -64,6 +64,16 @@ func free_cell_letter_from_num(num: Int) -> String? {
     }
 }
 
+func free_cell_num_from_letter(letter: String) -> Int? {
+    switch letter {
+    case "w": return 0
+    case "x": return 1
+    case "y": return 2
+    case "z": return 3
+    default: return nil
+    }    
+}
+
 func cascade_num_from_letter(string: String) -> Int? {
     switch string {
     case "a": return 0

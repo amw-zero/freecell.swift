@@ -9,8 +9,9 @@
 import Foundation
 
 enum Move {
-    case SingleCardMove(Int, Int)
-    case FreeCellMove(Int)
+    case SingleCardMove(cascade_src_idx: Int, cascade_dst_idx: Int)
+    case CascadeToFreeCellMove(cascade_idx: Int)
+    case FreeCellToCascadeMove(free_cell_src_idx: Int, cascade_dst_idx: Int)
 }
 
 func is_legal_free_cell_move(src: Card) -> Bool {
@@ -39,7 +40,7 @@ func make_single_card_move(input: String) -> Move? {
         return nil
     }
     
-    return .SingleCardMove(source_cascade, dest_cascade)
+    return .SingleCardMove(cascade_src_idx: source_cascade, cascade_dst_idx: dest_cascade)
 }
 
 func make_free_cell_move(input: String) -> Move? {
@@ -49,7 +50,22 @@ func make_free_cell_move(input: String) -> Move? {
         return nil
     }
     
-    return .FreeCellMove(src_idx)
+    return .CascadeToFreeCellMove(cascade_idx: src_idx)
+}
+
+func make_free_cell_to_cascade_move(input: String) -> Move? {
+    let src_letter = String(input[input.startIndex.advancedBy(0)])
+    let dst_letter = String(input[input.startIndex.advancedBy(1)])
+    
+    guard let src_idx = free_cell_num_from_letter(src_letter) else {
+        return nil
+    }
+    
+    guard let dst_idx = cascade_num_from_letter(dst_letter) else {
+        return nil
+    }
+    
+    return .FreeCellToCascadeMove(free_cell_src_idx: src_idx, cascade_dst_idx: dst_idx)
 }
 
 func move_from_input(input: String) -> Move? {
@@ -59,6 +75,13 @@ func move_from_input(input: String) -> Move? {
         && free_cell_input[free_cell_input.endIndex.predecessor().predecessor()] == " ":
         
         return make_free_cell_move(input)
+        
+    case let n
+        where n.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 3
+        && n[n.startIndex] == "w" || n[n.startIndex] == "x" || n[n.startIndex] == "y"
+        || n[n.startIndex] == "z":
+        
+        return make_free_cell_to_cascade_move(n)
         
     case let single_card_input
         where single_card_input.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 3:

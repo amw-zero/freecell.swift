@@ -62,6 +62,7 @@ struct Card: CustomStringConvertible, Comparable {
     }
 }
 
+
 // MARK: Comparable
 func ==(lhs: Card, rhs: Card) -> Bool {
     return lhs.rank.rawValue == rhs.rank.rawValue

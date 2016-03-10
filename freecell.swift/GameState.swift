@@ -43,7 +43,7 @@ class GameState {
             cascades[source_cascade_idx] = source_cascade
             cascades[dest_cascade_idx] = dest_cascade
             
-        case .FreeCellMove(let source_cascade_idx):
+        case .CascadeToFreeCellMove(let source_cascade_idx):
             if free_cells.count >= 4 {
                 return
             }
@@ -53,9 +53,26 @@ class GameState {
                 free_cells.append(card)
             }
             
-            
-            // WHYYY??
+            // Why is this necessary?
             cascades[source_cascade_idx] = source_cascade
+            
+        case .FreeCellToCascadeMove(let free_cell_idx, let cascade_idx):
+            if free_cell_idx >= free_cells.count {
+                return
+            }
+            
+            var cascade = cascades[cascade_idx]
+            let src_card = free_cells[free_cell_idx]
+            
+            guard let dst_card = cascade.last else {
+                return
+            }
+            
+            if is_legal_cascade_move(src_card, dst: dst_card) {
+                let moving_card = free_cells.removeAtIndex(free_cell_idx)
+                cascade.append(moving_card)
+                cascades[cascade_idx] = cascade
+            }
         }
     }
     
