@@ -77,6 +77,8 @@ class GameState {
     }
     
     func render() {
+        print("")
+        print("")
         print("space                                            enter")
         print_cells(free_cells)
         print("   :)   ", terminator: "")
