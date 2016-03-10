@@ -9,17 +9,22 @@
 import Foundation
 
 typealias Deck = [Card]
+typealias DeckArray = [Card]
+typealias Cascade = [Card]
+typealias Cascades = [Cascade]
 
 let DECK_SIZE = 52
+let CARDS_PER_SUIT = 13
+let NUM_CASCADES = 8
 
 func create_deck() -> Deck {
     var deck = [Card]()
     for i in 0 ... DECK_SIZE - 1 {
         switch i % 4 {
-        case 0: deck.append(Card(suit: Suit.Clubs, rank: Rank(rawValue: i % 13 + 1)!))
-        case 1: deck.append(Card(suit: Suit.Diamonds, rank: Rank(rawValue: i % 13 + 1)!))
-        case 2: deck.append(Card(suit: Suit.Hearts, rank: Rank(rawValue: i % 13 + 1)!))
-        case 3: deck.append(Card(suit: Suit.Spades, rank: Rank(rawValue: i % 13 + 1)!))
+        case 0: deck.append(Card(Suit.Clubs, Rank(rawValue: i % 13 + 1)!))
+        case 1: deck.append(Card(Suit.Diamonds, Rank(rawValue: i % 13 + 1)!))
+        case 2: deck.append(Card(Suit.Hearts, Rank(rawValue: i % 13 + 1)!))
+        case 3: deck.append(Card(Suit.Spades, Rank(rawValue: i % 13 + 1)!))
         default: break
         }
     }
@@ -27,8 +32,66 @@ func create_deck() -> Deck {
     return deck
 }
 
+func cascades_from_deck(deck: Deck) -> Cascades {
+    var cascades = Cascades()
+    
+    for _ in 0 ... NUM_CASCADES - 1 {
+        cascades.append(Cascade())
+    }
+    
+    for (i, card) in deck.enumerate() {
+        let c = i % NUM_CASCADES
+        var cascade = cascades[c]
+        cascade.append(card)
+        cascades[c] = cascade
+    }
+    
+    
+    return cascades
+}
+
+func create_cascades() -> Cascades {
+    let deck = create_deck()
+    return cascades_from_deck(deck)
+}
+
+func print_cascades(cascades: Cascades) {
+    var j = 0
+    let max_cascade = cascades.reduce(0) { (a, cascade) -> Int in
+        if cascade.count > a {
+            return cascade.count
+        } else {
+            return a
+        }
+    }
+    while j < max_cascade {
+        for i in 0 ... NUM_CASCADES - 1 {
+            var cascade = cascades[i]
+            if j < cascade.count {
+                print(cascade[j], terminator: "")
+            }
+        }
+        print("")
+        j++
+    }
+}
+
 func print_deck(deck: Deck) {
-    for card in deck {
+    for (i, card) in deck.enumerate() {
+        if i % (NUM_CASCADES + 1) == 0 {
+            print("")
+        }
+        
         print(card)
+    }
+}
+
+func shuffle_deck(var deck: Deck) {
+    for i in 0 ... DECK_SIZE - 1 {
+        let j = Int(arc4random() % 52)
+        if i == j {
+            continue
+        }
+        swap(&deck[i], &deck[j])
     }
 }

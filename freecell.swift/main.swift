@@ -9,8 +9,8 @@
 import Foundation
 
 func main() {
-    let deck = create_deck()
-    print_deck(deck)
+    let cascades = create_cascades()
+    print_cascades(cascades)
 }
 
 main()

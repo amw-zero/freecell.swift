@@ -50,6 +50,11 @@ enum Rank: Int {
 struct Card: CustomStringConvertible, Comparable {
     let suit: Suit
     let rank: Rank
+    
+    init(_ suit: Suit, _ rank: Rank) {
+        self.suit = suit
+        self.rank = rank
+    }
 
     // MARK: CustomStringConvertible
     var description: String {
