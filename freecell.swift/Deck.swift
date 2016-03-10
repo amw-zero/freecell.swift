@@ -77,16 +77,7 @@ func print_cascades(cascades: Cascades) {
     }
 }
 
-func print_deck(deck: Deck) {
-    for (i, card) in deck.enumerate() {
-        if i % (NUM_CASCADES + 1) == 0 {
-            print("")
-        }
-        
-        print(card)
-    }
-}
-
+// TODO: In place shuffle
 func shuffle_deck(var deck: Deck) {
     for i in 0 ... DECK_SIZE - 1 {
         let j = Int(arc4random() % 52)

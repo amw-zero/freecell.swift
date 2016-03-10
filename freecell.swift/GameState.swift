@@ -32,11 +32,7 @@ class GameState {
                 return
             }
             
-            
-            
             dest_cascade.append(card)
-            print(source_cascade)
-            print(dest_cascade)
             
             // TODO: Why is this necessary ?? Weird Array value/reference behavior
             cascades[source_cascade_idx] = source_cascade
