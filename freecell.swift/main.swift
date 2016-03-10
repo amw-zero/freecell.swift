@@ -10,7 +10,7 @@ import Foundation
 
 func main() {
     let deck = create_deck()
-    print(deck[0])
+    print_deck(deck)
 }
 
 main()

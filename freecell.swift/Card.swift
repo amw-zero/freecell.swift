@@ -15,15 +15,24 @@ enum Color {
     case Black
 }
 
-enum Suit {
+enum Suit: CustomStringConvertible {
     case Clubs
     case Diamonds
     case Hearts
     case Spades
+    
+    var description: String {
+        switch self {
+        case .Clubs:    return "c"
+        case .Diamonds: return "d"
+        case .Hearts:   return "h"
+        case .Spades:   return "s"
+        }
+    }
 }
 
 enum Rank: Int {
-    case Ace = 0
+    case Ace = 1
     case Two
     case Three
     case Four
@@ -44,7 +53,7 @@ struct Card: CustomStringConvertible, Comparable {
 
     // MARK: CustomStringConvertible
     var description: String {
-        return "[\(rank.rawValue)] "
+        return "[\(rank.rawValue)\(suit)] "
     }
 }
 
