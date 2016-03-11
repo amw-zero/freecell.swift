@@ -12,6 +12,7 @@ class GameState {
     var cascades: Cascades
     var free_cells: [Card]
     var foundations: [Card]
+    var smily_toggle: Bool = true
     
     init(cascades: Cascades, free_cells: [Card], foundations: [Card]) {
         self.cascades = cascades
@@ -74,6 +75,15 @@ class GameState {
                 cascades[cascade_idx] = cascade
             }
         }
+        smily_toggle = !smily_toggle
+    }
+    
+    func smily_string() -> String {
+        if smily_toggle {
+            return ":)"
+        } else {
+            return "(:"
+        }
     }
     
     func render() {
@@ -81,7 +91,7 @@ class GameState {
         print("")
         print("space                                            enter")
         print_cells(free_cells)
-        print("   :)   ", terminator: "")
+        print("   \(smily_string())   ", terminator: "")
         print_cells(foundations)
         print("")
         if (free_cells.count > 0) {
