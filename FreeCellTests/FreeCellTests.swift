@@ -20,10 +20,7 @@ class FreeCellTests: XCTestCase {
         super.tearDown()
     }
     
-    func test() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
+    func testLegalCascadeMoves() {
         let src = Card(Suit.Clubs, Rank.Queen)
         var dst = Card(Suit.Clubs, Rank.Jack)
 
