@@ -11,10 +11,10 @@ import Foundation
 class GameState {
     var cascades: Cascades
     var free_cells: [Card]
-    var foundations: [Card]
+    var foundations: [[Card]]
     var smily_toggle: Bool = true
     
-    init(cascades: Cascades, free_cells: [Card], foundations: [Card]) {
+    init(cascades: Cascades, free_cells: [Card], foundations: [[Card]]) {
         self.cascades = cascades
         self.free_cells = free_cells
         self.foundations = foundations
@@ -74,13 +74,30 @@ class GameState {
                 cascade.append(moving_card)
                 cascades[cascade_idx] = cascade
             }
-        case .CascadeToFoundationMove:
-            break
+        case .CascadeToFoundationMove(let cascade_idx):
+            move_cascade_card_to_foundation(cascade_idx)
         }
         smily_toggle = !smily_toggle
     }
     
-    func smily_string() -> String {
+    private func move_cascade_card_to_foundation(cascade_idx: Int) {
+        var cascade = cascades[cascade_idx]
+        guard let card = cascade.last else {
+            return
+        }
+        
+        let foundation_idx = foundation_index_from_suit(card.suit)
+        var foundation = foundations[foundation_idx]
+        if is_legal_foundation_move(card, dst: foundation.last) {
+            if let move_card = cascade.popLast() {
+                foundation.append(move_card)
+                foundations[foundation_idx] = foundation
+                cascades[cascade_idx] = cascade
+            }
+        }
+    }
+
+    private func smily_string() -> String {
         if smily_toggle {
             return ":)"
         } else {
@@ -92,9 +109,9 @@ class GameState {
         print("")
         print("")
         print("space                                            enter")
-        print_cells(free_cells)
+        print_free_cells(free_cells)
         print("   \(smily_string())   ", terminator: "")
-        print_cells(foundations)
+        print_foundations(foundations)
         print("")
         if (free_cells.count > 0) {
             print_free_cell_labels(free_cells)
@@ -106,7 +123,17 @@ class GameState {
     }
 }
 
-func print_cells(cards: [Card]) {
+func print_foundations(foundations: [[Card]]) {
+    for foundation in foundations {
+        if let last_card = foundation.last {
+            print("[\(last_card)] ", terminator: "")
+        } else {
+            print("[  ]  ", terminator: "")
+        }
+    }
+}
+
+func print_free_cells(cards: [Card]) {
     for i in 0 ... 3 {
         if i < cards.count {
             print("[\(cards[i])] ", terminator: "")

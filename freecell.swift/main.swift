@@ -20,7 +20,10 @@ func get_input() -> String? {
 func main() {
     let cascades = create_cascades()
     let free_cells = [Card]()
-    let foundations = [Card]()
+    var foundations = [[Card]]()
+    for _ in 0 ... 3 {
+        foundations.append([Card]())
+    }
     
     let game_state = GameState(
         cascades: cascades,

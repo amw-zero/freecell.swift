@@ -22,8 +22,17 @@ enum Move {
     // case FreeCellToFoundationMoves
 }
 
-func is_legal_foundation_move(src: Card, dst: Card) -> Bool {
-    return false
+func is_legal_foundation_move(src: Card, dst: Card?) -> Bool {
+    if let dest_card = dst {
+        let same_suit = src.suit == dest_card.suit
+        let dst_one_less_than_src = dest_card.rank.rawValue == src.rank.rawValue - 1
+        
+        return same_suit && dst_one_less_than_src
+    } else if src.rank == .Ace {
+        return true
+    } else {
+        return false
+    }
 }
 
 func is_legal_cascade_move(src: Card, dst: Card) -> Bool {
@@ -74,7 +83,7 @@ func make_free_cell_to_cascade_move(input: String) -> Move? {
 
 func make_cascade_to_foundation_move(input: String) -> Move? {
     let src_letter = String(input[input.startIndex])
-    guard let src_idx = free_cell_num_from_letter(src_letter) else {
+    guard let src_idx = cascade_num_from_letter(src_letter) else {
         return nil
     }
 
@@ -103,6 +112,7 @@ func move_from_input(input: String) -> Move? {
         
     case let s
         where s.utf_len() == 2:
+        
         return make_cascade_to_foundation_move(s)
         
     default: return nil

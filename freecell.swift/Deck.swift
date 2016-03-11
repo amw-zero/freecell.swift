@@ -106,3 +106,12 @@ func cascade_letter_from_num(num: Int) -> String? {
     default: return nil
     }
 }
+
+func foundation_index_from_suit(suit: Suit) -> Int {
+    switch suit {
+    case .Clubs:    return 0
+    case .Diamonds: return 1
+    case .Hearts:   return 2
+    case .Spades:   return 3
+    }
+}
