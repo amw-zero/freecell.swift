@@ -106,14 +106,3 @@ func cascade_letter_from_num(num: Int) -> String? {
     default: return nil
     }
 }
-
-// TODO: In place shuffle
-func shuffle_deck(var deck: Deck) {
-    for i in 0 ... DECK_SIZE - 1 {
-        let j = Int(arc4random() % 52)
-        if i == j {
-            continue
-        }
-        swap(&deck[i], &deck[j])
-    }
-}
