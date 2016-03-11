@@ -29,8 +29,7 @@ func main() {
     )
     
     var input = ""
-    while input != "q\n" {
-        print("")
+    repeat {
         game_state.render()
         if let raw_input = get_input() {
             input = raw_input
@@ -41,7 +40,7 @@ func main() {
                 print("Unrecognized command")
             }
         }
-    }
+    } while input != "q\n"
 }
 
 main()

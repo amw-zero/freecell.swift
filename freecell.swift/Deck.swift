@@ -56,8 +56,7 @@ func cascades_from_deck(deck: Deck) -> Cascades {
 }
 
 func create_cascades() -> Cascades {
-    let deck = create_deck()
-    return cascades_from_deck(deck)
+    return cascades_from_deck(create_deck())
 }
 
 func free_cell_letter_from_num(num: Int) -> String? {
