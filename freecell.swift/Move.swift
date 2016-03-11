@@ -15,19 +15,17 @@ extension String {
 }
 
 enum Move {
-    case SingleCardMove(cascade_src_idx: Int, cascade_dst_idx: Int)
+    case CascadeToCascadeMove(cascade_src_idx: Int, cascade_dst_idx: Int)
     case CascadeToFreeCellMove(cascade_idx: Int)
     case FreeCellToCascadeMove(free_cell_src_idx: Int, cascade_dst_idx: Int)
     case CascadeToFoundationMove(cascade_idx: Int)
-}
-
-func is_legal_free_cell_move(src: Card) -> Bool {
-    return false
+    // case FreeCellToFoundationMove
 }
 
 func is_legal_foundation_move(src: Card, dst: Card) -> Bool {
     return false
 }
+
 func is_legal_cascade_move(src: Card, dst: Card) -> Bool {
     let dst_one_more_than_src = dst.rank.rawValue == src.rank.rawValue + 1
     let opposite_colors = dst.suit != src.suit
@@ -47,7 +45,7 @@ func make_single_card_move(input: String) -> Move? {
         return nil
     }
     
-    return .SingleCardMove(cascade_src_idx: source_cascade, cascade_dst_idx: dest_cascade)
+    return .CascadeToCascadeMove(cascade_src_idx: source_cascade, cascade_dst_idx: dest_cascade)
 }
 
 func make_free_cell_move(input: String) -> Move? {

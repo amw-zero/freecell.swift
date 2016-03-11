@@ -22,7 +22,7 @@ class GameState {
     
     func perform_move(move: Move) {
         switch move {
-        case .SingleCardMove(let source_cascade_idx, let dest_cascade_idx):
+        case .CascadeToCascadeMove(let source_cascade_idx, let dest_cascade_idx):
             var source_cascade = cascades[source_cascade_idx]
             var dest_cascade = cascades[dest_cascade_idx]
             

@@ -21,10 +21,10 @@ func create_deck() -> Deck {
     var deck = [Card]()
     for i in 0 ... DECK_SIZE - 1 {
         switch i % 4 {
-        case 0: deck.append(Card(Suit.Clubs, Rank(rawValue: i % 13 + 1)!))
+        case 0: deck.append(Card(Suit.Clubs,    Rank(rawValue: i % 13 + 1)!))
         case 1: deck.append(Card(Suit.Diamonds, Rank(rawValue: i % 13 + 1)!))
-        case 2: deck.append(Card(Suit.Hearts, Rank(rawValue: i % 13 + 1)!))
-        case 3: deck.append(Card(Suit.Spades, Rank(rawValue: i % 13 + 1)!))
+        case 2: deck.append(Card(Suit.Hearts,   Rank(rawValue: i % 13 + 1)!))
+        case 3: deck.append(Card(Suit.Spades,   Rank(rawValue: i % 13 + 1)!))
         default: break
         }
     }
