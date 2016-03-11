@@ -20,6 +20,21 @@ class FreeCellTests: XCTestCase {
         super.tearDown()
     }
     
+    func testLegalFoundationMoves() {
+        let ace = Card(Suit.Clubs, Rank.Ace)
+        XCTAssert(is_legal_foundation_move(ace, dst: nil))
+        
+        let two = Card(Suit.Clubs, Rank.Two)
+        XCTAssert(is_legal_foundation_move(two, dst: ace))
+        
+        let four = Card(Suit.Clubs, Rank.Four)
+        XCTAssertFalse(is_legal_foundation_move(four, dst: ace))
+        XCTAssertFalse(is_legal_foundation_move(four, dst: nil))
+        XCTAssertFalse(is_legal_foundation_move(four, dst: nil))
+        XCTAssertFalse(is_legal_foundation_move(two, dst: four))     
+        
+    }
+    
     func testLegalCascadeMoves() {
         let src = Card(Suit.Clubs, Rank.Queen)
         var dst = Card(Suit.Clubs, Rank.Jack)
@@ -28,6 +43,8 @@ class FreeCellTests: XCTestCase {
         
         dst = Card(Suit.Diamonds, Rank.King)
         XCTAssertTrue(is_legal_cascade_move(src, dst: dst))
+        
+        XCTAssertTrue(is_legal_cascade_move(src, dst: nil))
     }
     
     func testPerformanceExample() {
