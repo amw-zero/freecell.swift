@@ -8,10 +8,17 @@
 
 import Foundation
 
+extension String {
+    func utf_len() -> Int {
+        return lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+    }
+}
+
 enum Move {
     case SingleCardMove(cascade_src_idx: Int, cascade_dst_idx: Int)
     case CascadeToFreeCellMove(cascade_idx: Int)
     case FreeCellToCascadeMove(free_cell_src_idx: Int, cascade_dst_idx: Int)
+    case CascadeToFoundationMove(cascade_idx: Int)
 }
 
 func is_legal_free_cell_move(src: Card) -> Bool {
@@ -68,25 +75,38 @@ func make_free_cell_to_cascade_move(input: String) -> Move? {
     return .FreeCellToCascadeMove(free_cell_src_idx: src_idx, cascade_dst_idx: dst_idx)
 }
 
+func make_cascade_to_foundation_move(input: String) -> Move? {
+    let src_letter = String(input[input.startIndex.advancedBy(0)])
+    guard let src_idx = free_cell_num_from_letter(src_letter) else {
+        return nil
+    }
+
+    return .CascadeToFoundationMove(cascade_idx: src_idx)
+}
+
 func move_from_input(input: String) -> Move? {
     switch input {
-    case let free_cell_input
-        where free_cell_input.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 3
-        && free_cell_input[free_cell_input.endIndex.predecessor().predecessor()] == " ":
+    case let s
+        where s.utf_len() == 3
+        && s[s.endIndex.predecessor().predecessor()] == " ":
         
         return make_free_cell_move(input)
         
-    case let n
-        where n.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 3
-        && n[n.startIndex] == "w" || n[n.startIndex] == "x" || n[n.startIndex] == "y"
-        || n[n.startIndex] == "z":
+    case let s
+        where s.utf_len() == 3
+        && s[s.startIndex] == "w" || s[s.startIndex] == "x" || s[s.startIndex] == "y"
+        || s[s.startIndex] == "z":
         
-        return make_free_cell_to_cascade_move(n)
+        return make_free_cell_to_cascade_move(s)
         
-    case let single_card_input
-        where single_card_input.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 3:
+    case let s
+        where s.utf_len() == 3:
         
-        return make_single_card_move(single_card_input)
+        return make_single_card_move(s)
+        
+    case let s
+        where s.utf_len() == 2:
+        return make_cascade_to_foundation_move(s)
         
     default: return nil
     }

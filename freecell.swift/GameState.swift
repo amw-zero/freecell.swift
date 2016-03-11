@@ -74,6 +74,8 @@ class GameState {
                 cascade.append(moving_card)
                 cascades[cascade_idx] = cascade
             }
+        case .CascadeToFoundationMove:
+            break
         }
         smily_toggle = !smily_toggle
     }
