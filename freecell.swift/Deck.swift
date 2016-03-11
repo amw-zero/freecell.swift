@@ -29,6 +29,12 @@ func create_deck() -> Deck {
         }
     }
     
+    for i in 0 ... deck.count - 1 {
+        let tmp = deck[i]
+        let j = Int(arc4random()) % deck.count
+        deck[i] = deck[j]
+        deck[j] = tmp
+    }
     return deck
 }
 
