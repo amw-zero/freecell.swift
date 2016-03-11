@@ -19,7 +19,7 @@ enum Move {
     case CascadeToFreeCellMove(cascade_idx: Int)
     case FreeCellToCascadeMove(free_cell_src_idx: Int, cascade_dst_idx: Int)
     case CascadeToFoundationMove(cascade_idx: Int)
-    // case FreeCellToFoundationMove
+    // case FreeCellToFoundationMoves
 }
 
 func is_legal_foundation_move(src: Card, dst: Card) -> Bool {
@@ -34,8 +34,7 @@ func is_legal_cascade_move(src: Card, dst: Card) -> Bool {
 }
 
 func make_single_card_move(input: String) -> Move? {
-    // TODO: A little ugly
-    let c1 = String(input[input.startIndex.advancedBy(0)])
+    let c1 = String(input[input.startIndex])
     let c2 = String(input[input.startIndex.advancedBy(1)])
     
     guard let source_cascade = cascade_num_from_letter(c1) else {
@@ -49,7 +48,7 @@ func make_single_card_move(input: String) -> Move? {
 }
 
 func make_free_cell_move(input: String) -> Move? {
-    let src_letter = String(input[input.startIndex.advancedBy(0)])
+    let src_letter = String(input[input.startIndex])
     
     guard let src_idx = cascade_num_from_letter(src_letter) else {
         return nil
@@ -59,7 +58,7 @@ func make_free_cell_move(input: String) -> Move? {
 }
 
 func make_free_cell_to_cascade_move(input: String) -> Move? {
-    let src_letter = String(input[input.startIndex.advancedBy(0)])
+    let src_letter = String(input[input.startIndex])
     let dst_letter = String(input[input.startIndex.advancedBy(1)])
     
     guard let src_idx = free_cell_num_from_letter(src_letter) else {
@@ -74,7 +73,7 @@ func make_free_cell_to_cascade_move(input: String) -> Move? {
 }
 
 func make_cascade_to_foundation_move(input: String) -> Move? {
-    let src_letter = String(input[input.startIndex.advancedBy(0)])
+    let src_letter = String(input[input.startIndex])
     guard let src_idx = free_cell_num_from_letter(src_letter) else {
         return nil
     }
