@@ -31,8 +31,7 @@ class FreeCellTests: XCTestCase {
         XCTAssertFalse(is_legal_foundation_move(four, dst: ace))
         XCTAssertFalse(is_legal_foundation_move(four, dst: nil))
         XCTAssertFalse(is_legal_foundation_move(four, dst: nil))
-        XCTAssertFalse(is_legal_foundation_move(two, dst: four))     
-        
+        XCTAssertFalse(is_legal_foundation_move(two, dst: four))
     }
     
     func testLegalCascadeMoves() {
