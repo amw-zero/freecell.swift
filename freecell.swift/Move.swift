@@ -35,11 +35,15 @@ func is_legal_foundation_move(src: Card, dst: Card?) -> Bool {
     }
 }
 
-func is_legal_cascade_move(src: Card, dst: Card) -> Bool {
-    let dst_one_more_than_src = dst.rank.rawValue == src.rank.rawValue + 1
-    let opposite_colors = dst.suit != src.suit
-    
-    return dst_one_more_than_src && opposite_colors
+func is_legal_cascade_move(src: Card, dst: Card?) -> Bool {
+    if let dest_card = dst {
+        let dst_one_more_than_src = dest_card.rank.rawValue == src.rank.rawValue + 1
+        let opposite_colors = dest_card.suit != src.suit
+        
+        return dst_one_more_than_src && opposite_colors
+    } else {
+        return true
+    }
 }
 
 func make_single_card_move(input: String) -> Move? {
